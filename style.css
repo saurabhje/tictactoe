@@ -1,0 +1,26 @@
+.grids{
+    position: absolute;
+    top: 10%;
+    right: 0;
+    bottom: 10%;
+    left: 30%;
+    margin: 1rem;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    border-radius: 6px;
+    height: 500px;
+    width: 500px;
+}
+.square{
+    position: relative;
+    background-color: rgb(162, 206, 221);
+    border-radius: 4px;
+}
+.signs{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size:2rem;
+}
