@@ -1,3 +1,6 @@
+body{
+    display: flex;
+}
 .grids{
     position: relative;
     top: 10%;
@@ -12,6 +15,12 @@
     border-radius: 6px;
     height: 500px;
     width: 500px;
+}
+.nongame{
+    background-color: lightblue;
+}
+.winner{
+    background-color: greenyellow;
 }
 .square{
     position: relative;

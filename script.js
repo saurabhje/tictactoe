@@ -1,3 +1,4 @@
+
 const Gameboard = (()=>{
     let gameboard = [];
     for(let i = 0;i<9;i++){
@@ -12,20 +13,22 @@ const Gameboard = (()=>{
 
     Array.from(board.children).forEach((square,index) =>{
         square.addEventListener('click',()=>{
-            square.innerHTML = `<p>${game.currentplayer.sign}</p>`;
-            square.setAttribute('data', game.currentplayer.sign);
-            gameboard[index] = game.currentplayer.sign;
-            square.style.pointerEvents = 'none';
-            game.remainingmoves -= 1;
-            game.checkwinner();
-            if (game.winnerdeclared == false) {
-                if (game.remainingmoves > 0) {
-                    game.nextPlayer();
-                } else if (game.remainingmoves == 0) {
-                    game.declareTie();
-                }
-                else{
-                    return;
+                if(game.winnerdeclared === false) {       
+                square.innerHTML = `<p>${game.currentplayer.sign}</p>`;
+                square.setAttribute('data', game.currentplayer.sign);
+                gameboard[index] = game.currentplayer.sign;
+                square.style.pointerEvents = 'none';
+                game.remainingmoves -= 1;
+                game.checkwinner();
+                if (game.winnerdeclared == false) {
+                    if (game.remainingmoves > 0) {
+                        game.nextPlayer();
+                    } else if (game.remainingmoves == 0) {
+                        game.declareTie();
+                    }
+                    else{
+                        return;
+                    }
                 }
             }
         });
@@ -34,7 +37,7 @@ const Gameboard = (()=>{
         gameboard
     };
 })();
-
+let nongame = document.getElementsByClassName('nongame')
 const player = (name, sign) => {
     return {name, sign};
 }
@@ -62,8 +65,11 @@ const game = (()=>{
         winningindex.forEach((item,index)=>{
             if(Gameboard.gameboard[item[0]]===this.currentplayer.sign && Gameboard.gameboard[item[1]]
             ===this.currentplayer.sign && Gameboard.gameboard[item[2]] === this.currentplayer.sign){
+                this.winnerdeclared = true;
+                let winner = document.querySelector('.winner')
+                winner.innerHTML=`<p>${this.currentplayer.sign} is winner</p>`
+                index = 1;
                 console.log('winner');
-                stop();
             }
         });
     }
@@ -74,7 +80,6 @@ const game = (()=>{
     }
 
     function declareTie() {
-        let nongame = document.getElementsByClassName('nongame')
         nongame.innerHTML = "<p>Tie game!</p>";
     }
     return {
